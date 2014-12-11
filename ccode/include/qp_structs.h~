@@ -1,0 +1,80 @@
+/*
+ * qp_structs.h
+ *
+ *  Created on: Oct 1, 2014
+ *      Author: sverre
+ */
+
+/** \file
+ * Contains the declaration of the structs that are common for the algorithms
+ */
+#ifndef QP_STRUCTS_H_
+#define QP_STRUCTS_H_
+#include "typedefs.h"
+
+struct Problem {
+	real_t * H;	/**< Hessian matrix. Dimensions n x n, and has to be positive definite */
+	real_t * c;
+	real_t * A;
+	real_t * A_t;
+	real_t * b;
+	real_t * lb_hat;
+	real_t * ub_hat;
+	real_t * lb;
+	real_t * ub;
+	real_t * z0;
+}; /**< Contains all the matrices and vectors used to describe the general QP */
+
+struct Options {
+	uint32_t maxiter_outer;
+	uint32_t maxiter_inner;
+	real_t eps_ds;
+	real_t eps_pf;
+	real_t eps_inner;
+	uint32_t algorithm;
+	real_t rho;
+};
+
+struct Info {
+	boolean lb_is_inf;
+	boolean ub_is_inf;
+	boolean lb_hat_is_inf;
+	boolean ub_hat_is_inf;
+	real_t eigH_max;
+	real_t eigH_min;
+	real_t Ld;
+	uint32_t problem_case;
+	uint32_t pf_vec_length;
+};
+
+struct Output {
+	uint32_t iterations;
+	uint32_t iterations_inner_tot;
+	real_t time;
+	real_t time_tot_inner;
+	uint32_t flag_last_satisfied;	// 0 = ds, 1 = pf
+	uint32_t niter_feasible_ds;
+	uint32_t niter_feasible_pf;
+	uint32_t exitflag_inner; // 1 = feasible point found, 2 = Maximum number of iterations exceeded.
+	uint32_t num_exceeded_max_niter_inner; // Totale number of times the inner problem exceeded the number of iterations
+	real_t * ds_vector;
+	real_t * pf_vector;
+};
+
+struct Result {
+	real_t * zopt;
+	real_t fopt;
+	uint32_t exitflag; // 1 = feasible point found, 2 = Maximum number of iterations exceeded.
+	real_t * lambda1;
+	real_t * lambda2;
+	struct Output * out;
+};
+
+struct Array{
+  real_t * array;
+  uint32_t used;
+  uint32_t size;
+};
+
+
+#endif /* QP_STRUCTS_H_ */

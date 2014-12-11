@@ -1,0 +1,5 @@
+TODO:
+
+Go through geader files and delete stuff like init_problem.h
+
+Why is quadprog so much slower when setting an initial point??
