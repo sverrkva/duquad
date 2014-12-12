@@ -1,76 +1,10 @@
 function [zopt,fopt,exitflag,output] = DGM(varargin)
-% H has to be symetric and positiv definite
 
-% TODO
-% - make help text
-
-if nargin < 10
-    opt = [];
-    if nargin < 9
-        z0 = [];
-        if nargin < 8
-            ub = [];
-            if nargin < 7
-                lb = [];
-                if nargin < 6
-                    ub_hat = [];
-                    if nargin < 5
-                        lb_hat = [];
-                        if nargin < 4
-                            b = [];
-                            if nargin < 3
-                                A = [];
-                                if nargin < 2
-                                    error('Incorrect number of input arguments in DGM().')                 
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
-
-[H,c] = deal(varargin{1:2});
-
-if nargin > 2
-    A = varargin{3};
-end    
-if nargin > 3
-    b = varargin{4};
-end    
-if nargin > 4
-    lb_hat = varargin{5};
-end  
-if nargin > 5
-    ub_hat = varargin{6};
-end
-if nargin > 6
-    lb = varargin{7};
-end    
-if nargin > 7
-    ub = varargin{8};
-end  
-if nargin > 8
-    z0 = varargin{9};
-end
-if nargin > 9
-    opt = varargin{10};
-end
-if nargin > 10
-    error('Incorrect number of input arguments in DGM().')
-end    
+[H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt] = deal(varargin{1:10});
 
 n = size(H,2);
 m = size(A,1);
 
-if isempty(A)
-    error('No point in using DGM without defining any linear_inequalities')
-end
-if isempty(b)
-    b = zeros(m,1);     % not optimal to calculate with this value when empty
-end
 if isempty(lb)
     lb_inf = true;
 else
@@ -80,18 +14,6 @@ if isempty(ub)
     ub_inf = true;
 else
     ub_inf = false;
-end
-if isempty(z0)
-    z0 = zeros(n,1);
-end
-if isempty(opt)
-    % Set default values
-    opt.maxiter_outer = 10000;
-    opt.maxiter_inner = 100;
-    opt.eps_ds = 0.001;
-    opt.eps_pf = 0.05;
-    opt.eps_inner = 0.0001;
-    opt.algorithm = 1;
 end
 
 % initial point must be feasible
@@ -114,7 +36,7 @@ elseif lb_hat == ub_hat
 else
     problem_case = 1;
 end
-    
+
 % calculating alpha
 H_eig = eig(H);
 sigma = min(H_eig);
@@ -322,6 +244,12 @@ output.iterations = niter-1;
 output.iterations_inner_tot = iterations_inner_tot;
 output.niter_feasible_ds = niter_feasible_ds+1;
 output.niter_feasible_pf = niter_feasible_pf+1;
+
+if opt.algorithm == 1
+    output.algorithm = 'DGM last';
+else 
+    output.algorithm = 'DGM avg';
+end
    
 end
 
@@ -352,12 +280,4 @@ function value = dual_obj(z,H,c,lambda1,lambda2,A_z,b_ub_hat,b_lb_hat,problem_ca
             value = 0.5* (z'*H*z) + c'*z... 
                + lambda2'*(b_lb_hat-A_z);
     end
-end
-
-function printv(v,length)
-    fprintf('[ ');
-    for i=1:length
-        fprintf('%f  ', v(i));
-    end
-    fprintf(']\n');
 end

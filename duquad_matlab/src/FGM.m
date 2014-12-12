@@ -1,39 +1,38 @@
 function [zopt,fopt,niter] = FGM(varargin)
 % *** Fast Gradient method ***
 %
-% Solves the problem: f(x) = 0.5*x'*H*x + c'x,
-% where x = [x1 x2 ... xN]^T
+% Solves the problem: 
+%
+%      min f(z) = 0.5*z'*H*z + c'z,
+%       z
+%          s.t.
+%          lb <= z <= ub,
+%           
+% where z = [z1 z2 ... zN]^T
 %
 % INPUTS:
-% H: input matrix (must be positive definite and symmetric)
-% c: input vector
-% lb: lower bound vector
-% ub: upper bound vector
-% z0: initial guess
+% H: Hessian matrix (must be positive definite and symmetric)
+% c: gradient vector
+% lb: lower bound for optimization variable z
+% ub: upper bound for optimization variable z
+% z0: initial point
 % opt: struct containing algorithm options
+% info: contains smallest and largest eigenvalue of H
 % 
 % OUTPUTS:
-% xopt: optimal solution
-% fopt: optimal value (f(xopt))
-% niter: number of iteration for finding xopt
+% zopt: optimal solution
+% fopt: optimal value (f(zopt))
+% niter: number of iteration for finding the solution
 % 
 % USAGE:
-% [xopt,fopt,niter] = FG(H,c);
-% [xopt,fopt,niter] = FG(H,c,lb,ub);
-% [xopt,fopt,niter] = FG(H,c,lb,ub,z0);
-% [xopt,fopt,niter] = FG(H,c,lb,ub,z0,opt);
-% [xopt,fopt,niter] = FG(H,c,[],[],[],opt); 
+% [zopt,fopt,niter] = FGM(H,c);
+% [zopt,fopt,niter] = FGM(H,c,lb,ub);
+% [zopt,fopt,niter] = FGM(H,c,lb,ub,z0);
+% [zopt,fopt,niter] = FGM(H,c,lb,ub,z0,opt);
+% [zopt,fopt,niter] = FGM(H,c,[],[],[],opt); 
 % 
 % AUTHOR:
 % Sverre Kvamme
-
-% TODO:
-% - check if matrix dim er korrekte
-% - sholud express if one of the stoppingcriterias are met
-% - check for typos
-% - make help text perfect
-% - take the time
-% - update the gradient_descent with the same changes
 
 if nargin < 7
     info = [];
@@ -91,7 +90,8 @@ if isempty(z0)
     z0 = zeros(n,1);
 end
 if isempty(opt)
-    opt = set_options('default');
+    opt.maxiter = 10000;
+    opt.eps = 0.001;
 end
 if isempty(info)
     H_eig = eig(H);
@@ -149,7 +149,7 @@ while diff_function_value > opt.eps
     niter = niter+1;
    
 end
-%fprintf('niter inner: %d\n', niter)
+
 zopt = z;
 fopt = f_value;
 
