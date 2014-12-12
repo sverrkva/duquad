@@ -35,15 +35,14 @@ opt.algorithm = 3;          % Spesifies the algoritm used to solve the problem.
 %   7: FALM last
 %   8: FALM avg
 
+
 % Run DuQuad
 
-[zopt,fopt,exitflag,output]...
-    = duquad(H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt);
+[zopt,fopt,exitflag,output] = duquad(H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt);
 
 fprintf('\nf: %f\n',fopt);
 fprintf('iterations: %d\n',output.iterations);
 fprintf('Algorithm used to solve problem: %s\n',output.algorithm);
-
 
 
 
