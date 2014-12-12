@@ -1,7 +1,7 @@
 DuQuad
 ======
 
-The DuQuad optimization toolbox attempts to solve the quadratic programming problem on the form:
+The DuQuad optimization toolbox attempts to solve a quadratic programming problem on the form:
 
 min 0.5\*z'\*H\*z + c'\*z,  
 &nbsp;&nbsp;z  
