@@ -1,19 +1,17 @@
 function [zopt,fopt,exitflag,output] = duquad(varargin)
-%
+% 
 % *** DuQuad - Quadratic Programming Optimization ***
 % 
 %  Attempts to solve the quadratic programming problem:
-%
+% 
 %  --------------------------------------
-%  |   min f(z) = 0.5*z'*H*z + c'z,     |
+%  |   min 0.5*z'*H*z + c'*z,           |
 %  |    z                               |
 %  |       s.t.                         |
-%  |       lb_hat <= Az - b <= ub       |
+%  |       lb_hat <= Az - b <= ub_hat   |
 %  |       lb <= z <= ub                |
 %  --------------------------------------         
-%
-% where z = [z1 z2 ... zN]^T
-%
+% 
 % INPUTS:
 % H:        Hessian matrix (must be positive definite and symmetric)
 % c:        gradient vector
@@ -54,7 +52,7 @@ function [zopt,fopt,exitflag,output] = duquad(varargin)
 %                     6: ALM avg
 %                     7: FALM last
 %                     8: FALM avg
-%
+% 
 % AUTHOR:
 % Sverre Kvamme
 % 

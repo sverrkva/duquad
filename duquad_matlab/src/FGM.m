@@ -1,15 +1,14 @@
 function [zopt,fopt,niter] = FGM(varargin)
+%
 % *** Fast Gradient method ***
 %
 % Solves the problem: 
 %
-%      min f(z) = 0.5*z'*H*z + c'z,
+%      min 0.5*z'*H*z + c'*z,
 %       z
 %          s.t.
 %          lb <= z <= ub,
 %           
-% where z = [z1 z2 ... zN]^T
-%
 % INPUTS:
 % H: Hessian matrix (must be positive definite and symmetric)
 % c: gradient vector
