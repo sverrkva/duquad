@@ -6,7 +6,7 @@ DuQuad
 The DuQuad optimization toolbox attempts to solve the quadratic programming problem on the form:
 
 min 0.5\*z'\*H\*z + c'\*z,  
-&nbsp;z  
+&nbsp;&nbsp;z  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s.t.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lb_hat <= Az - b <= ub_hat   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lb <= z <= ub  
