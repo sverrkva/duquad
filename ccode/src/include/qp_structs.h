@@ -13,27 +13,27 @@
 #include "typedefs.h"
 
 struct Problem {
-	real_t * H;	/**< Hessian matrix. Dimensions n x n, and has to be positive definite */
-	real_t * c;
-	real_t * A;
-	real_t * A_t;
-	real_t * b;
-	real_t * lb_hat;
-	real_t * ub_hat;
-	real_t * lb;
-	real_t * ub;
-	real_t * z0;
+	real_t * H;	/**< The Hessian matrix. Dimensions n x n, and has to be positive definite */
+	real_t * c; /**< The gradient vector */
+	real_t * A; /**< Linear constraints matrix Dimensions m x n */
+	real_t * A_t; /**< A transposed */
+	real_t * b; /**< Linear constraints vector */
+	real_t * lb_hat; /**< The lower bound for the linear constraints */
+	real_t * ub_hat; /**< The upper bound for the linear constraints */
+	real_t * lb; /**< The lower bound for optimization variable z */
+	real_t * ub; /**< The upper bound for optimization variable z */
+	real_t * z0; /**< The initial point */
 }; /**< Contains all the matrices and vectors used to describe the general QP */
 
 struct Options {
-	uint32_t maxiter_outer;
-	uint32_t maxiter_inner;
-	real_t eps_ds;
-	real_t eps_pf;
-	real_t eps_inner;
-	uint32_t algorithm;
-	real_t rho;
-};
+	uint32_t maxiter_outer; /**< Maximum number of iterations in the outer loop */
+	uint32_t maxiter_inner; /**< Maximum number of iterations in the inner loop */
+	real_t eps_ds; /**< Tolerance for dual suboptimality */
+	real_t eps_pf; /**< Tolerance for primal feasibility */
+	real_t eps_inner; /**< Tolerance for primal feasibility in the inner problem */
+	uint32_t algorithm; /**< Spesifies the algoritm used to solve the problem. Values: 1: DGM last, 2: DGM avg, 3: DFGM last, 4: DFGM avg, 5: ALM last, 6: ALM avg, 7: FALM last, 8: FALM avg */
+	real_t rho; /**< Penalty parameter used in ALM and FALM */
+}; /**< Option specified by the user. Default values can be found in documentation */
 
 struct Info {
 	boolean lb_is_inf;
