@@ -1,9 +1,10 @@
 % *** DuQuad Examplefile ***
 
 % HELP: type 'help duquad' in console.
+% run the makefile 'make.m' to generate a mex file. 
+
 
 % Make a QP problem with constraints
-
 H = [11,4 ; 4,22];  % Hessian
 c = [3;4];          % gradient vector
 A = [1 1;2 1];      % linear constraints matrix
@@ -15,11 +16,11 @@ ub = [0.5;2];       % upper bound for optimization variable z
 z0 = [0.5;-0.5];    % initial point
 
 
-% Set options for the toolbox. (default values in documentaion)
-
+% Set options for the toolbox. If opt is not given as input to duquad,
+% default values are chosen. 
 opt.maxiter_outer = 1000;   % Maximum number of iterations in the outer loop
 opt.maxiter_inner = 100;    % Maximum number of iterations in the inner loop
-opt.eps_ds = 0.000001;       %  olerance for dual suboptimality
+opt.eps_ds = 0.000001;      %  olerance for dual suboptimality
 opt.eps_pf = 0.001;         % Tolerance for primal feasibility
 opt.eps_inner = 0.000001;   % Tolerance for primal feasibility in the inner problem
 opt.rho = 1;                % Penalty parameter used in ALM and FALM
@@ -37,22 +38,16 @@ opt.algorithm = 3;          % Spesifies the algoritm used to solve the problem.
 
 
 % Run DuQuad
-
 [zopt,fopt,exitflag,output] = duquad(H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt);
 
 fprintf('\nf: %f\n',fopt);
 fprintf('iterations: %d\n',output.iterations);
-exitflag
 
 
 %% Check result with quadprog
 
-opts = optimoptions('quadprog','Algorithm','active-set','Display','off');
-
-[zopt,fopt,EXITFLAG,OUTPUT]...
-    = quadprog(H,c,[A;-A],[b+ub_hat;-b-lb_hat],[],[],lb,ub,z0,opts);
-
-fprintf('\nQuadprog result:\n');
-fprintf('f: %f\n',fopt);
-
-EXITFLAG
+% [zopt,fopt,EXITFLAG,OUTPUT]...
+%     = quadprog(H,c,[A;-A],[b+ub_hat;-b-lb_hat],[],[],lb,ub,z0);
+% 
+% fprintf('\nQuadprog result:\n');
+% fprintf('f: %f\n',fopt);
