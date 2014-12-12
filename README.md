@@ -1,31 +1,28 @@
 DuQuad
 ======
 
-
-*** DuQuad - Quadratic Programming Optimization ***
+### Quadratic Programming Optimization 
 
  Attempts to solve the quadratic programming problem:
 
 
-   min f(z) = 0.5*z'*H*z + c'z,
-    z
-       s.t.
-       lb_hat <= Az - b <= ub
-       lb <= z <= ub
-
-where z = [z1 z2 ... zN]^T
+   min f(z) = 0.5*z'*H*z + c'z,  
+    z  
+       s.t.  
+       lb_hat <= Az - b <= ub  
+       lb <= z <= ub  
 
 INPUTS:
-H:        Hessian matrix (must be positive definite and symmetric)
-c:        gradient vector
-A:        linear constraints matrix
-b:        linear constraints vector
-lb_hat:   lower bound for the linear constraints
-ub_hat:   upper bound for the linear constraints
-lb:       lower bound for optimization variable z
-ub:       upper bound for optimization variable z
-z0:       initial point
-opt:      struct containing options, see OPTIONS
+H:        Hessian matrix (must be positive definite and symmetric)  
+c:        gradient vector  
+A:        linear constraints matrix   
+b:        linear constraints vector  
+lb_hat:   lower bound for the linear constraints  
+ub_hat:   upper bound for the linear constraints  
+lb:       lower bound for optimization variable z  
+ub:       upper bound for optimization variable z  
+z0:       initial point  
+opt:      struct containing options, see OPTIONS  
 
 OUTPUTS:
 zopt:     optimal solution
