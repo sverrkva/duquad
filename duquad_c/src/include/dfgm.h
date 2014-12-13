@@ -12,7 +12,6 @@
 #include "math_functions.h"
 #include "fgm.h"
 #include "print.h"
-#include "init_problem.h"
 
 struct Struct_DFGM {
 
@@ -45,6 +44,7 @@ struct Struct_DFGM {
 
 	real_t time_inner_y;
 	uint32_t iterations_inner_y;
+
 };
 
 int32_t DFGM();

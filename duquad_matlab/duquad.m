@@ -1,17 +1,17 @@
-function [zopt,fopt,exitflag,output] = duquad(varargin)
-% 
+function [zopt,fopt,exitflag,output,lambda1,lambda2] = duquad(varargin)
+%
 % *** DuQuad - Quadratic Programming Optimization ***
 % 
 %  Attempts to solve the quadratic programming problem:
-% 
+%
 %  --------------------------------------
-%  |   min 0.5*z'*H*z + c'*z,           |
+%  |   min f(z) = 0.5*z'*H*z + c'z,     |
 %  |    z                               |
 %  |       s.t.                         |
-%  |       lb_hat <= Az - b <= ub_hat   |
+%  |       lb_hat <= Az - b <= ub       |
 %  |       lb <= z <= ub                |
 %  --------------------------------------         
-% 
+%
 % INPUTS:
 % H:        Hessian matrix (must be positive definite and symmetric)
 % c:        gradient vector
@@ -27,8 +27,10 @@ function [zopt,fopt,exitflag,output] = duquad(varargin)
 % OUTPUTS:
 % zopt:     optimal solution
 % fopt:     optimal value (f(xopt))
-% niter:    number of iteration for finding the solution
+% exitflag: values: 1 solution is found, 2 reached max num iterations, -1 error 
 % output:   struct containing info from the problem solving
+% lambda1:  set of lagrangian multipliers
+% lambda2:  set of lagrangian multipliers
 % 
 % USAGE:
 % [zopt,fopt,niter] = duquad(H,c);
@@ -43,7 +45,8 @@ function [zopt,fopt,exitflag,output] = duquad(varargin)
 % opt.eps_pf:         Tolerance for primal feasibility
 % opt.eps_inner:      Tolerance for primal feasibility in the inner problem
 % opt.rho:            Penalty parameter used in ALM and FALM
-% opt.algorithm:      Spesifies the algoritm used to solve the problem. Values: 
+% opt.algorithm:      Spesifies the algoritm used to solve the problem.
+%                     Values (opt.algorithm):
 %                     1: DGM last
 %                     2: DGM avg
 %                     3: DFGM last
@@ -52,7 +55,7 @@ function [zopt,fopt,exitflag,output] = duquad(varargin)
 %                     6: ALM avg
 %                     7: FALM last
 %                     8: FALM avg
-% 
+%
 % AUTHOR:
 % Sverre Kvamme
 % 
@@ -161,19 +164,19 @@ end
 
 % Start the algorithms
 if opt.algorithm <= 2
-    [zopt,fopt,exitflag,output]...
+    [zopt,fopt,exitflag,output,lambda1,lambda2]...
         = DGM(H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt);
     
 elseif opt.algorithm <= 4
-    [zopt,fopt,exitflag,output]...
+    [zopt,fopt,exitflag,output,lambda1,lambda2]...
         = DFGM(H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt);
     
 elseif opt.algorithm <= 6
-    [zopt,fopt,exitflag,output]...
+    [zopt,fopt,exitflag,output,lambda1,lambda2]...
         = ALM(H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt);
     
 elseif opt.algorithm <= 8
-    [zopt,fopt,exitflag,output]...
+    [zopt,fopt,exitflag,output,lambda1,lambda2]...
         = FALM(H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt);
     
 else

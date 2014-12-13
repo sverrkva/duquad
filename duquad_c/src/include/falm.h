@@ -12,7 +12,6 @@
 #include "math_functions.h"
 #include "fgm.h"
 #include "print.h"
-#include "init_problem.h"
 
 struct Struct_FALM{
 

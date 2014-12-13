@@ -5,6 +5,9 @@
  *      Author: Sverre
  */
 
+/** \file
+ * Contains system libraries, mex libraries, global constants, global variables and some debugging macros.
+ */
 #ifndef HEAD_H_
 #define HEAD_H_
 
@@ -27,8 +30,8 @@
 #define FALSE 0
 
 // Global variables
-uint32_t N;
-uint32_t M;
+uint32_t N;	/**< Dimension of the Hessian matrix */
+uint32_t M;	/**< Dimension of the linear constraint matrix */
 uint32_t ALGORITHM;
 
 // *** Macros ***

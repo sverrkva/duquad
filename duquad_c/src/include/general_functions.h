@@ -5,6 +5,10 @@
  *      Author: sverre
  */
 
+/** \file
+ * Contains some general functions that are common for most other files.
+ */
+
 #ifndef GENERAL_FUNCTIONS_H_
 #define GENERAL_FUNCTIONS_H_
 

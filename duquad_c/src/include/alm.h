@@ -12,7 +12,6 @@
 #include "math_functions.h"
 #include "fgm.h"
 #include "print.h"
-#include "init_problem.h"
 
 
 struct Struct_ALM {
@@ -44,6 +43,5 @@ struct Struct_ALM {
 };
 
 int32_t ALM();
-
 
 #endif /* ALM_H_ */

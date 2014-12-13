@@ -44,17 +44,6 @@ static int32_t solve_FALM(struct Struct_FALM *s, struct Struct_FGM *p_in)
 	// calculating alpha
 	real_t alpha = s->opt->rho;
 
-	// Must get right b from mex!!!!!!!!!!!!!!
-
-	// Making constant vectors and matrices
-	//A2 = A'*A; ???????
-	//mtx_vec_mul(s->prob->A_t,s->prob->b,s->temp1_dim_N,N,M);
-	//vector_scalar_mul(s->temp1_dim_N,rho,s->rho_At_b,N); // rho_At_b = rho * A' * b:
-
-	// New H (H_hat). NOTE: when rho in not constant H_hat has to be calculated every time
-	// Get H_hat from mex !!!!!
-
-
 	// Dynamc Arrays for ds and pf
 	struct Array ds_array, pf_array;
 	initArray(&ds_array, 100);

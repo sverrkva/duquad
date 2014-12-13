@@ -1,4 +1,4 @@
-function [zopt,fopt,exitflag,output] = DFGM(varargin)
+function [zopt,fopt,exitflag,output,lambda1,lambda2] = DFGM(varargin)
 
 [H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt] = deal(varargin{1:10});
 

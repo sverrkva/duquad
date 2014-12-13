@@ -42,12 +42,10 @@ struct Struct_FGM
 	// Options
 	uint32_t maxiter;
 	real_t eps;
+
 };
-
-
 
 uint32_t FGM();
 void clean_up_FGM_C();
-
 
 #endif /* FAST_GRADIENT_H_ */

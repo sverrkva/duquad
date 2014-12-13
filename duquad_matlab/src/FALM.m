@@ -1,4 +1,4 @@
-function [zopt,fopt,exitflag,output] = FALM(varargin)
+function [zopt,fopt,exitflag,output,lambda1,lambda2] = FALM(varargin)
 
 [H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt] = deal(varargin{1:10});
 
@@ -192,6 +192,9 @@ if opt.algorithm == 7
 else 
     output.algorithm = 'FALM avg';
 end
+
+lambda1 = lambda;
+lambda2 = 0;
 
 end
     

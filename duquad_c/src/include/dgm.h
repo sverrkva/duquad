@@ -12,8 +12,6 @@
 #include "math_functions.h"
 #include "fgm.h"
 #include "print.h"
-#include "init_problem.h"
-
 
 struct Struct_DGM {
 
@@ -35,6 +33,7 @@ struct Struct_DGM {
 	real_t * summ;
 	real_t * pf_vec;
 	real_t * A_z;
+
 };
 
 int32_t DGM();

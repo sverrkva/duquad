@@ -1,15 +1,12 @@
 
-
 #include "head.h"
 #include "gdm.h"
 #include "fgm.h"
 #include "dgm.h"
-//#include "print.h"
 #include "dfgm.h"
 #include "alm.h"
 #include "falm.h"
-
-
+#include "print.h"
 
 // Inputs
 #define H_IN prhs[0]
@@ -46,7 +43,7 @@ static void make_output();
 static void make_output_fail_safe();
 static void make_Output_struct();
 
-static void clean_up_Output_M();    // Same function in init_problem.h
+static void clean_up_Output_M();
 static void clean_up_Result();
 
 static void init_DGM();
@@ -86,10 +83,6 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
             clean_up_DGM_matlab(&s);
             return;
         }
- //       print_Options(s.opt);
-//         print_Info(s.info);
-//         print_Result(s.res);
-//         print_Problem(s.prob);
         make_output(nlhs, plhs, s.res);
         clean_up_DGM_matlab(&s);
     }
@@ -103,10 +96,6 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
             clean_up_DFGM_matlab(&s);
             return;
         }
-//         print_Options(s.opt);
-//         print_Info(s.info);
-//         print_Result(s.res);
-//         print_Problem(s.prob);
         make_output(nlhs, plhs, s.res);
         clean_up_DFGM_matlab(&s);
     }
@@ -217,8 +206,7 @@ static void init_Problem(int nrhs, const mxArray *prhs[], struct Problem *p)
     p->ub_hat = mxGetPr(a4);
     p->lb = mxGetPr(a5);
     p->ub = mxGetPr(a6);
-    p->z0 = mxGetPr(a7);
-    
+    p->z0 = mxGetPr(a7);  
 }
 
 static void allocate_DGM(struct Struct_DGM *s)

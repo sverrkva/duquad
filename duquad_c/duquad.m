@@ -12,8 +12,6 @@ function [zopt,fopt,exitflag,output,lambda1,lambda2] = duquad(varargin)
 %  |       lb <= z <= ub                |
 %  --------------------------------------         
 %
-% where z = [z1 z2 ... zN]^T
-%
 % INPUTS:
 % H:        Hessian matrix (must be positive definite and symmetric)
 % c:        gradient vector
@@ -29,14 +27,16 @@ function [zopt,fopt,exitflag,output,lambda1,lambda2] = duquad(varargin)
 % OUTPUTS:
 % zopt:     optimal solution
 % fopt:     optimal value (f(xopt))
-% niter:    number of iteration for finding the solution
+% exitflag: values: 1 solution is found, 2 reached max num iterations, -1 error 
 % output:   struct containing info from the problem solving
+% lambda1:  set of lagrangian multipliers
+% lambda2:  set of lagrangian multipliers
 % 
 % USAGE:
-% [zopt,fopt,niter] = duquad(H,c);
 % [zopt,fopt,niter] = duquad(H,c,A,b);
 % [zopt,fopt,niter] = duquad(H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt);
 % [zopt,fopt,niter] = duquad(H,c,A,b,[],[],[],[],[],opt);
+% etc.
 % 
 % OPTIONS:
 % opt.maxiter_outer:  Maximum number of iterations in the outer loop
@@ -45,7 +45,8 @@ function [zopt,fopt,exitflag,output,lambda1,lambda2] = duquad(varargin)
 % opt.eps_pf:         Tolerance for primal feasibility
 % opt.eps_inner:      Tolerance for primal feasibility in the inner problem
 % opt.rho:            Penalty parameter used in ALM and FALM
-% opt.algorithm:      Spesifies the algoritm used to solve the problem. Values: 
+% opt.algorithm:      Spesifies the algoritm utilized to solve the problem.
+%                     Values (opt.algorithm): 
 %                     1: DGM last
 %                     2: DGM avg
 %                     3: DFGM last
@@ -127,7 +128,7 @@ if isempty(A)
     error('No boint in using DGM without defining any linear_inequalities')
 end
 if isempty(b)
-    b = zeros(m,1);     % not optimal to calculate with this value when empty
+    b = zeros(m,1);
 end
 if isempty(lb)
     lb_is_inf = true;
@@ -152,7 +153,6 @@ if isempty(opt)
     opt.algorithm = 3;
     opt.rho = 1;
 end
-
 
 % Desciding the category/case of the problem 
 if isempty(ub_hat) && isempty(lb_hat)
@@ -233,7 +233,9 @@ if opt.algorithm <= 4
         elseif (exitflag == 2)
             fprintf('Algorithm %d reached maximum number of iterations.\n', opt.algorithm);
         end
+        
 else
+    % Running ALM or FALM
     % Making constant vectors and matrices
     % b = b + lb_hat 
     if isempty(ub_hat) || isempty(lb_hat)
@@ -253,14 +255,33 @@ else
     [zopt,fopt,exitflag,output,lambda1]...
         = main(H,c,A_t,b,lb_hat,ub_hat,lb,ub,z0,opt,INFO,H_hat,A2,rho_At_b);
     % NOTE: Sending in transposed of A, A', because when reading input in
-    % mex this is more easy. Maybe do something about this
+    % mex this is more easy.
     if (exitflag == -1)
         error('Error trying to run the program. See stderr for error messages.');
     elseif (exitflag == 2)
         fprintf('Algorithm %d reached maximum number of iterations.\n', opt.algorithm);
     end
-    
+    lambda2 = 0;
 end
+
+if opt.algorithm == 1
+    output.algorithm = 'DGM last';
+elseif opt.algorithm == 2
+    output.algorithm = 'DGM avg';
+elseif opt.algorithm == 3
+    output.algorithm = 'DFGM last';
+elseif opt.algorithm == 4
+    output.algorithm = 'DFGM avg';
+elseif opt.algorithm == 5
+    output.algorithm = 'ALM last';
+elseif opt.algorithm == 6
+    output.algorithm = 'ALM avg';
+elseif opt.algorithm == 7
+    output.algorithm = 'FALM last';
+elseif opt.algorithm == 8
+    output.algorithm = 'FALM avg';
+end
+
 
 end
 

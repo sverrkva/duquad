@@ -24,7 +24,4 @@ void print_problem_FGM();
 void print_result_FGM();
 void print_result_GDM();
 
-
-
-
 #endif /* PRINT_H_ */

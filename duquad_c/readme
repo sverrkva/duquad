@@ -1,0 +1,1 @@
+The makefile (make.m) is an example on how to compile the c-code. However, it make use of gcc and has only been tested in linux (ubuntu). 

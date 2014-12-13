@@ -1,4 +1,4 @@
-function [zopt,fopt,exitflag,output] = ALM(varargin)
+function [zopt,fopt,exitflag,output,lambda1,lambda2] = ALM(varargin)
 
 [H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt] = deal(varargin{1:10});
 
@@ -174,7 +174,10 @@ if opt.algorithm == 5
 else 
     output.algorithm = 'ALM avg';
 end
-     
+
+lambda1 = lambda;
+lambda2 = 0;
+
 end
 
 

@@ -5,6 +5,10 @@
  *      Author: Sverre
  */
 
+/** \file
+ * Header for the internal math library. Contains basic vector and matrix operations. The library is tried to be as optimized as possible.
+ */
+
 #ifndef MATH_FUNCTIONS_H_
 #define MATH_FUNCTIONS_H_
 
@@ -23,7 +27,6 @@ void vector_max_with_zero();
 real_t vector_norm_2();
 
 real_t abs_2();
-
 
 void mtx_transpose();
 

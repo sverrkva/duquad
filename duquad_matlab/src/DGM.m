@@ -1,4 +1,4 @@
-function [zopt,fopt,exitflag,output] = DGM(varargin)
+function [zopt,fopt,exitflag,output,lambda1,lambda2] = DGM(varargin)
 
 [H,c,A,b,lb_hat,ub_hat,lb,ub,z0,opt] = deal(varargin{1:10});
 
@@ -87,7 +87,7 @@ iterations_inner_tot = iterations_inner;
 A_z = A*z; % used later
 
 % find the value of the dual function (Lagrangian) first time
-dual_value = dual_obj(z,H,c,lambda1, lambda2,A_z,b_ub_hat,b_lb_hat,problem_case);
+dual_value = dual_obj(z,H,c,lambda1,lambda2,A_z,b_ub_hat,b_lb_hat,problem_case);
 dual_value_diff = opt.eps_ds + 1;
 
 % initialize other necessary variables
@@ -244,6 +244,7 @@ output.iterations = niter-1;
 output.iterations_inner_tot = iterations_inner_tot;
 output.niter_feasible_ds = niter_feasible_ds+1;
 output.niter_feasible_pf = niter_feasible_pf+1;
+
 
 if opt.algorithm == 1
     output.algorithm = 'DGM last';

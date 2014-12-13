@@ -8,7 +8,6 @@
 #include "fgm.h"
 
 // NOTE: z0 must be feasible
-// TODO: Can drop z0,zopt, making z0 feasible, warm start lambda?
 
 uint32_t FGM(struct Struct_FGM *s)
 {
