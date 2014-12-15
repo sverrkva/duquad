@@ -1,9 +1,9 @@
-///*
-// * DFGM.c
-// *
-// *  Created on: Sep 19, 2014
-// *      Author: sverre
-// */
+/*
+ * DFGM.c
+ *
+ *  Created on: Sep 19, 2014
+ *      Author: sverre
+ */
 
 #include "dfgm.h"
 
@@ -13,6 +13,9 @@ static int32_t solve_DFGM();
 static real_t dual_obj();
 static void clean_up_inner_problem();
 static void init_inner_problem();
+
+
+/* public functions definition */
 
 int32_t DFGM(struct Struct_DFGM *s)
 {
@@ -477,6 +480,9 @@ static int32_t solve_DFGM(struct Struct_DFGM *s, struct Struct_FGM *p_in)
 
 	return 0;
 }
+
+
+/* Definition of static functions */
 
 static real_t dual_obj(struct Struct_DFGM *s, const uint32_t prob_case)
 {

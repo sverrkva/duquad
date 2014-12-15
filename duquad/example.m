@@ -4,15 +4,15 @@
 
 % Make a QP problem with constraints
 
-H = [11 4 ; 4 22];  % Hessian matrix
-c = [3 ; 4];        % gradient vector
+H = [11,4 ; 4,22];  % Hessian
+c = [3;4];          % gradient vector
 A = [1 1;2 1];      % linear constraints matrix
-b = [2 ; 3];        % linear constraints vector
-lb_hat = [-2 ; -2]; % lower bound for the linear constraints
-ub_hat = [2 ; 2];   % upper bound for the linear constraints
-lb = [-1 ; -2];     % lower bound for optimization variable z
-ub = [0.5 ; 2];     % upper bound for optimization variable z
-z0 = [0.5 ; -0.5];  % initial point
+b = [2;3];          % linear constraints vector
+lb_hat = [-2;-2];   % lower bound for the linear constraints
+ub_hat = [2;2];        % upper bound for the linear constraints
+lb = [-1;-2];       % lower bound for optimization variable z
+ub = [0.5;2];       % upper bound for optimization variable z
+z0 = [0.5;-0.5];    % initial point
 
 
 % Set options for the toolbox. (default values in documentaion)
@@ -53,5 +53,3 @@ opts = optimoptions('quadprog','Algorithm','active-set','Display','off');
 
 fprintf('\nQuadprog result:\n');
 fprintf('f: %f\n',fopt);
-
-EXITFLAG

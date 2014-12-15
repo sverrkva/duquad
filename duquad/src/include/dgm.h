@@ -5,6 +5,10 @@
  *      Author: Sverre
  */
 
+/** \file
+ *  ### Dual Gradient Method ###
+ */
+
 #ifndef DGM_H_
 #define DGM_H_
 
@@ -34,9 +38,10 @@ struct Struct_DGM {
 	real_t * pf_vec;
 	real_t * A_z;
 
-};
+}; /**< Struct containing all necessary vectors and parameters for running DGM */
 
-int32_t DGM();
+// Public functions
+int32_t DGM(struct Struct_DGM *s);
 
 
 #endif /* DGM_H_ */

@@ -5,7 +5,6 @@
  *      Author: sverre
  */
 
-
 #include "falm.h"
 
 /* static functions declaration */
@@ -14,6 +13,9 @@ static int32_t solve_FALM();
 static real_t dual_obj();
 static void clean_up_inner_problem();
 static void init_inner_problem();
+
+
+/* public functions definition */
 
 int32_t FALM(struct Struct_FALM *s)
 {
@@ -315,6 +317,8 @@ static int32_t solve_FALM(struct Struct_FALM *s, struct Struct_FGM *p_in)
 	return 0;
 }
 
+
+/* Definition of static functions */
 
 static real_t dual_obj(struct Struct_FALM *s)
 {

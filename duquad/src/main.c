@@ -1,4 +1,11 @@
-
+/** \file
+ * Main file which takes input from matlab and construct data in c-code format.
+ * This mainfile is called from the matlab function duquad.m.
+ * After converting the input, it runs the spesified algorithm, i.e one 
+ * of the following: DGM, DFGM, ALM or FALM. 
+ * When getting the result from the algorithm, the data is converted back
+ * to matlab format. 
+ */
 #include "head.h"
 #include "gdm.h"
 #include "fgm.h"
@@ -34,7 +41,8 @@
 #define LAMBDA1_OUT plhs[4]
 #define LAMBDA2_OUT plhs[5]
 
-// Private functions
+/* static functions declaration */
+
 static void init_Info();
 static void init_Options();
 static void init_Problem();
@@ -62,8 +70,7 @@ static void init_FALM();
 static void allocate_FALM();
 static void clean_up_FALM_matlab();
 
-
-// z0 might be a problem
+/* public functions definition */
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) 
 {
     _SDEBUG("*** Main start**\n");
@@ -131,6 +138,10 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     _SDEBUG("*** Main finish**\n");
     return;
 }
+
+
+
+/* Definition of static functions */
 
 static void init_Info(int nrhs, const mxArray *prhs[], struct Info *p)
 {

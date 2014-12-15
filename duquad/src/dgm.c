@@ -7,10 +7,15 @@
 
 #include "dgm.h"
 
+/* static functions declaration */
+
 static int32_t solve_DGM();
 static real_t dual_obj();
 static void clean_up_inner_problem();
 static void init_inner_problem();
+
+
+/* public functions definition */
 
 int32_t DGM(struct Struct_DGM *s)
 {
@@ -376,6 +381,9 @@ static int32_t solve_DGM(struct Struct_DGM *s, struct Struct_FGM *p_in)
 
 	return 0;
 }
+
+
+/* Definition of static functions */
 
 static real_t dual_obj(struct Struct_DGM *s, const uint32_t prob_case)
 {

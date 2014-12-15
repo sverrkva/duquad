@@ -53,5 +53,3 @@ opts = optimoptions('quadprog','Algorithm','active-set','Display','off');
 
 fprintf('\nQuadprog result:\n');
 fprintf('f: %f\n',fopt);
-
-EXITFLAG

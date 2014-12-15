@@ -5,6 +5,10 @@
  *      Author: sverre
  */
 
+/** \file
+ *  ### Fast Augmented Lagrangian Method ###
+ */
+
 #ifndef FALM_H_
 #define FALM_H_
 
@@ -27,8 +31,6 @@ struct Struct_FALM{
 	real_t * temp1_dim_N;
 	real_t * temp2_dim_M;
 	real_t * temp3_dim_M;
-	//real_t * b_ub_hat;	// b + ub_hat
-	//real_t * b_lb_hat;	// b + lb_hat
 	real_t * z_avg;
 	real_t * summ;
 	real_t * pf_vec;
@@ -36,12 +38,9 @@ struct Struct_FALM{
 
 	// Different from DGM
 	real_t * lambda_old;
-	//real_t * lambda2_old;
 	real_t * y1;
 	real_t * z_ds;
-	//real_t * y2;
 	real_t * A_z_ds;
-
 
 	real_t time_inner_y;
 	uint32_t iterations_inner_y;
@@ -51,8 +50,9 @@ struct Struct_FALM{
 	real_t * A2;
 	real_t * rho_At_b;
 
-};
+}; /**< Struct containing all necessary vectors and parameters for running FALM */
 
-int32_t FALM();
+// Public functions
+int32_t FALM(struct Struct_FALM *s);
 
 #endif /* FALM_H_ */

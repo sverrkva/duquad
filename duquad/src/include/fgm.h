@@ -5,6 +5,10 @@
  *      Author: Sverre
  */
 
+/** \file
+ *  ### Fast Gradient Method ###
+ */
+
 #ifndef FAST_GRADIENT_H_
 #define FAST_GRADIENT_H_
 
@@ -43,9 +47,10 @@ struct Struct_FGM
 	uint32_t maxiter;
 	real_t eps;
 
-};
+}; /**< Struct containing all necessary vectors and parameters for running FGM */
 
-uint32_t FGM();
+// Public functions
+uint32_t FGM(struct Struct_FGM *s);
 void clean_up_FGM_C();
 
 #endif /* FAST_GRADIENT_H_ */

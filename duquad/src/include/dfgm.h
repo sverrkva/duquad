@@ -5,6 +5,10 @@
  *      Author: sverre
  */
 
+/** \file
+ *  ### Dual Fast Gradient Method ###
+ */
+
 #ifndef DFGM_H_
 #define DFGM_H_
 
@@ -45,8 +49,9 @@ struct Struct_DFGM {
 	real_t time_inner_y;
 	uint32_t iterations_inner_y;
 
-};
+}; /**< Struct containing all necessary vectors and parameters for running DFGM */
 
-int32_t DFGM();
+// Public functions
+int32_t DFGM(struct Struct_DFGM *s);
 
 #endif /* DFGM_H_ */

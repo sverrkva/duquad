@@ -52,7 +52,7 @@ struct Output {
 	uint32_t iterations_inner_tot; /**< Total number of iterations for the inner problem  */
 	real_t time; /**< Runtime of the algorithm after all initialization is done */
 	real_t time_tot_inner; /**< Total time spent on solving the inner problem */
-	uint32_t flag_last_satisfied; /**< Flag spesifies which stopping criteria was resolved last. Value: 0 = dual suboptimality, 1 = primal feasibility  */
+	uint32_t flag_last_satisfied; /**< Flag specifies which stopping criteria was resolved last. Value: 0 = dual suboptimality, 1 = primal feasibility  */
 	uint32_t niter_feasible_ds; /**< Number of iterations the criterion for dual suboptimality was satisfied */
 	uint32_t niter_feasible_pf; /**< Number of iterations the criterion for primal feasibility was satisfied */
 	uint32_t exitflag_inner; /**< Exitflag for the inner problem. Values: 1 = feasible point found, 2 = Maximum number of iterations exceeded */
@@ -65,8 +65,8 @@ struct Result {
 	real_t * zopt; /**< Optimal point */
 	real_t fopt; /**< Optimal value */
 	uint32_t exitflag; /**< Values: 1 = optimal point found, 2 = maximum number of iterations exceeded, -1 = error */
-	real_t * lambda1; /**< Set of lagrangian multipliers */
-	real_t * lambda2; /**< Set of lagrangian multipliers */
+	real_t * lambda1; /**< Set of Lagrangian multipliers */
+	real_t * lambda2; /**< Set of Lagrangian multipliers */
 	struct Output * out; /**< Sruct containing other results */
 }; /**< Outputs of the algorithms */
 

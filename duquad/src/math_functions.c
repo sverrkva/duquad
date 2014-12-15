@@ -7,15 +7,13 @@
 
 #include "math_functions.h"
 
-
-
 static void mtx_vec_mul_small(const real_t *mtx, const real_t *v, real_t *res, const uint32_t rows, const uint32_t cols)
 {
 	uint32_t i;	/* row number */
 	uint32_t j; /* column number */
 	uint32_t k = 0; /* matrix index (row * col) */
 	for (i=0;i<rows;i++) {
-		res[i] = 0.0;						// is this needed??
+		res[i] = 0.0;
 		for (j=0;j<cols;j++) {
 			res[i] += mtx[k++] * v[j];
 		}
@@ -76,7 +74,6 @@ void vector_min(const real_t *v1, const real_t *v2, real_t *res, const uint32_t 
 	}
 }
 
-// put the maximum of each element of v1 and v2 in res
 void vector_max(const real_t *v1, const real_t *v2, real_t *res, const uint32_t length)
 {
 	uint32_t i;
@@ -155,7 +152,6 @@ void vector_max_with_zero(real_t *v, const uint32_t length)
 		if(v[i] < 0.0)
 			v[i] = 0.0;
 	}
-
 }
 
 real_t vector_norm_2(real_t *v, const uint32_t length)

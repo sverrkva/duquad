@@ -5,13 +5,17 @@
  *      Author: sverre
  */
 
-
 #include "alm.h"
+
+/* static functions declaration */
 
 static int32_t solve_ALM();
 static real_t dual_obj();
 static void clean_up_inner_problem();
 static void init_inner_problem();
+
+
+/* public functions definition */
 
 int32_t ALM(struct Struct_ALM *s)
 {
@@ -252,6 +256,9 @@ static int32_t solve_ALM(struct Struct_ALM *s, struct Struct_FGM *p_in)
 
 	return 0;
 }
+
+
+/* Definition of static functions */
 
 static real_t dual_obj(struct Struct_ALM *s, const uint32_t prob_case)
 {
